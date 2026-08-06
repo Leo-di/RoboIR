@@ -12,6 +12,9 @@ class Affordance:
     target_category: str
     action: str
     confidence: float = 1.0
+    region_hint: str | None = None
+    contact_mode: str | None = None
+    preconditions: tuple[str, ...] = ()
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 
@@ -27,6 +30,13 @@ class AffordanceMap:
             affordance
             for affordance in self.affordances
             if affordance.target_category == scene_object.category
+        ]
+
+    def for_region(self, region_hint: str) -> List[Affordance]:
+        return [
+            affordance
+            for affordance in self.affordances
+            if affordance.region_hint == region_hint
         ]
 
     def query(self, scene_graph: SceneGraph, predicate: Optional[Callable[[Affordance], bool]] = None) -> List[tuple[SceneObject, Affordance]]:

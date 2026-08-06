@@ -1,5 +1,6 @@
 from .base import TaskPack
 from .catalog import TaskCatalog, TaskPackSpec, default_task_catalog
+from .deskservice import build_deskservice_pack
 from .lab import build_lab_pack
 from .office import build_office_pack
 from .retail import build_retail_pack
@@ -10,6 +11,7 @@ PACK_BUILDERS = {
     "lab": build_lab_pack,
     "office": build_office_pack,
     "retail": build_retail_pack,
+    "deskservice": build_deskservice_pack,
 }
 
 
@@ -32,5 +34,6 @@ __all__ = [
     "build_lab_pack",
     "build_office_pack",
     "build_retail_pack",
+    "build_deskservice_pack",
     "PACK_BUILDERS",
 ]

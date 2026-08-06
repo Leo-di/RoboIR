@@ -1,80 +1,48 @@
 # RoboIR
 
-`RoboIR` is an embodied intermediate representation for desk-level industrial and service robot tasks.
+`RoboIR` is a desk-level embodied intermediate representation for industrial and service robot tasks.
 
-It sits between perception / VLA policies and robot execution, with a focus on **scene state**, **affordance grounding**, **skill routing**, **graph execution**, **recovery**, and **traceable memory**.
+It is designed as the orchestration layer between perception, VLA policies, planning, execution, recovery, memory, and human intervention.
 
-## Why this layer matters
+## What it adds
 
-Modern embodied stacks are powerful but fragmented:
+High-star embodied-AI projects usually solve one of four things: data, policies, evaluation, or execution.
+`RoboIR` focuses on the missing middle: a reusable task substrate that can ground skills, route execution, recover from failure, and export traces as datasets.
 
-- foundation models produce actions or plans
-- robot frameworks execute controllers and policies
-- task logic is often scattered across prompts, scripts, and ad hoc glue
+## Core ideas
 
-`RoboIR` proposes a compact middle layer that makes embodied tasks easier to compose, inspect, recover, and reuse across robots and simulators.
+- **Scene grounding** — object-centric scene graphs and spatial relations
+- **Affordance grounding** — action candidates tied to object categories and regions
+- **Task frames** — phase-aware execution context for observe / ground / plan / execute / verify / recover
+- **Skill routing** — plugin-registered skills scored against task frames and affordances
+- **Graph execution** — multi-step embodied workflows with recovery hooks
+- **Trace memory** — execution logs that can be turned into datasets and reports
+- **Human intervention** — request/response hooks for operator-in-the-loop recovery
 
-## Core concepts
+## Why this is different
 
-- **SceneGraph** — structured objects and spatial relations
-- **AffordanceMap** — candidate actions grounded in the scene
-- **SkillRegistry** — reusable skill specifications
-- **SkillPlanner** — ranks which skill should fire next
-- **GraphRuntime** — executes multi-step embodied workflows
-- **RecoveryManager** — applies failure-recovery policies
-- **SpatialMemory** — stores object poses and spatial history
-- **HumanInTheLoopManager** — records intervention requests and responses
-- **TraceLog** — exports execution traces for debugging and dataset creation
+Instead of being only a skill registry or only a benchmark harness, `RoboIR` tries to make embodied tasks composable:
+
+- a planner chooses grounded skills
+- a graph runtime executes them in phases
+- a runtime records memory, failure, and trace artifacts
+- a benchmark suite compares packs across desk-level domains
 
 ## Project layout
 
 ```text
 src/roboir/
-  adapters/      Robot adapter interfaces and mocks
-  analysis.py    Trace analysis and reporting
-  benchmark.py   Task benchmark primitives
-  cli.py         Command line interface
-  dataset.py     Trace dataset export/import
-  discovery.py   Plugin discovery and loading
-  executor.py    Robot-backed embodied executor
-  intervention.py Human-in-the-loop request/response handling
-  policy.py      Rule-based policy entrypoint
-  runtime.py     Runtime orchestration layer
-  spatial.py     Spatial memory for poses and history
-  suite.py       Multi-pack evaluation suite
-  tasks/         Task packs for workcell, lab, office, retail
-  visualization.py Trace-to-mermaid conversion
+  embodied.py     Task frames, phases, and grounded task state
+  affordance.py   Affordance definitions and queries
+  planner.py      Skill ranking and grounding decisions
+  graph.py        Graph nodes and phased execution runtime
+  runtime.py      End-to-end orchestration and reporting
+  executor.py     Robot adapter-backed execution bridge
+  analysis.py     Trace summary and markdown export
+  dataset.py      Trace dataset export/import
+  plugins.py      Default embodied plugin packs
+  tasks/          Domain task packs: workcell, lab, office, retail, deskservice
 ```
-
-## Architecture
-
-```text
-RGB / RGB-D / Language
-        ↓
-  SceneGraph + Memory + SpatialMemory
-        ↓
-AffordanceMap + SkillPlanner
-        ↓
-    GraphRuntime / EmbodiedExecutor
-        ↓
- RecoveryManager / Intervention / TraceLog
-        ↓
- ROS2 / Simulator / Robot
-```
-
-## Current scope
-
-This repository now includes:
-
-- scene representation for desk-level tasks
-- affordance grounding for pick / place / inspect style actions
-- plugin-based skill registration and discovery hooks
-- graph-based execution with trace output
-- recovery policies and human-in-the-loop intervention hooks
-- trace dataset export / import
-- benchmark packs for multiple workcell-style tasks
-- task suites across multiple packs
-- Python-first API and CLI
 
 ## Quick start
 
@@ -82,40 +50,45 @@ This repository now includes:
 python3 -m venv .venv
 . .venv/bin/activate
 python -m pip install -e .[dev]
-roboir demo --pack workcell
-roboir benchmark --pack lab
-roboir suite --packs workcell lab office retail
-roboir export --pack office --output trace.jsonl
-roboir analyze --input trace.jsonl --markdown report.md
+roboir catalog
+roboir demo --pack deskservice
+roboir benchmark --pack deskservice
+roboir suite --packs workcell lab office retail deskservice
 pytest
 ```
 
-## Task packs
+## Desk-level pack
 
-- `workcell` — kit-style desk manipulation
-- `lab` — sample handling and storage
-- `office` — fetch and handoff logistics
-- `retail` — shelf restock and handoff logistics
+`deskservice` is the most representative pack for this repo.
+It models a desktop industrial/service workflow with:
 
-## Examples
+- observe / ground / plan / execute phases
+- region-aware affordances
+- contact-mode-aware skills
+- routing from pickup zone to transfer lane to tray zone
+- traceable memory and benchmarkable multi-step execution
 
-- [`examples/workcell_kitting.py`](examples/workcell_kitting.py)
-- [`examples/recovery_demo.py`](examples/recovery_demo.py)
-- [`examples/benchmark_workcell.py`](examples/benchmark_workcell.py)
-- [`examples/benchmark_lab.py`](examples/benchmark_lab.py)
-- [`examples/benchmark_office.py`](examples/benchmark_office.py)
+## Example
 
-## Roadmap
+```python
+from roboir import RegionConstraint, TaskFrame, TaskPhase, build_task_pack
+from roboir.policy import RuleBasedPolicy
+from roboir.planner import SkillPlanner
 
-- richer affordance grounding
-- ROS2 and simulator adapters
-- plugin discovery from installed packages
-- trace visualization and failure analysis
-- more benchmark packs and task suites
-- offline learning from execution traces
-- human-in-the-loop recovery policies with intervention logging
-- benchmark publishing and leaderboard support
+pack = build_task_pack("deskservice")
+frame = TaskFrame(
+    goal="desk assembly handoff",
+    pack="deskservice",
+    phase=TaskPhase.OBSERVE,
+    target_object_ids=("part_1",),
+    region_constraints=(RegionConstraint(name="pickup_zone", spatial_hint="table-left"),),
+)
+planner = SkillPlanner(pack.runtime.graph_runtime.skill_registry)
+policy = RuleBasedPolicy(planner)
+decision = policy.decide(pack.scene_graph, pack.runtime.affordance_map, task_frame=frame)
+print(decision)
+```
 
 ## Status
 
-This is an early framework skeleton with multiple task packs and analysis tools. The current goal is to build a practical embodied middle layer that can grow into a larger open-source ecosystem.
+This is a framework prototype, but it already covers the main layers that top embodied-AI repos tend to need: state, grounding, execution, recovery, traces, datasets, and plug-in task packs.

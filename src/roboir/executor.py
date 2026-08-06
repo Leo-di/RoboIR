@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import List
 
+from .embodied import TaskFrame
 from .graph import GraphNode, GraphStatus, StepResult
 from .memory import TaskMemory
 from .runtime import RoboIRRuntime
@@ -24,8 +25,8 @@ class EmbodiedExecutor:
     adapter: RobotAdapter
     records: List[ExecutionRecord] = field(default_factory=list)
 
-    def run(self, goal: str, scene_graph: SceneGraph, nodes: List[GraphNode]) -> List[StepResult]:
-        context = self.runtime.graph_runtime.build_context(goal, scene_graph)
+    def run(self, goal: str, scene_graph: SceneGraph, nodes: List[GraphNode], task_frame: TaskFrame | None = None) -> List[StepResult]:
+        context = self.runtime.graph_runtime.build_context(goal, scene_graph, task_frame=task_frame)
         results: List[StepResult] = []
         for node in nodes:
             observation = self.adapter.observe()
@@ -34,7 +35,7 @@ class EmbodiedExecutor:
             if not feedback.success and result.status == GraphStatus.SUCCESS:
                 result = StepResult(GraphStatus.FAILED, feedback.message, artifacts={"robot_feedback": feedback.metadata})
             self.runtime.graph_runtime.memory.store(node.name, result.message, source=node.skill_name)
-            self.runtime.trace_log.add_step(node.name, result)
+            self.runtime.trace_log.add_step(node.name, result, phase=node.phase.value if node.phase is not None else None)
             self.records.append(ExecutionRecord(node_name=node.name, observation=observation, feedback=feedback, result=result))
             results.append(result)
         return results

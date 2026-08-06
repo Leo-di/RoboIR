@@ -5,6 +5,7 @@ from enum import Enum
 from typing import Any, Callable, Dict, List, Optional
 
 from .affordance import AffordanceMap
+from .embodied import TaskFrame, TaskPhase
 from .memory import TaskMemory
 from .scene import SceneGraph
 from .skill import SkillContext, SkillRegistry
@@ -30,6 +31,9 @@ class GraphNode:
     action: Callable[[SkillContext, TaskMemory], StepResult]
     recovery: Optional[Callable[[SkillContext, TaskMemory, StepResult], StepResult]] = None
     retries: int = 0
+    phase: TaskPhase | None = None
+    region_hint: str | None = None
+    contact_mode: str | None = None
 
 
 @dataclass
@@ -38,13 +42,18 @@ class GraphRuntime:
     affordance_map: AffordanceMap
     memory: TaskMemory = field(default_factory=TaskMemory)
 
-    def build_context(self, goal: str, scene_graph: SceneGraph) -> SkillContext:
-        return SkillContext(goal=goal, scene_graph=scene_graph, state={"memory": self.memory.snapshot()})
+    def build_context(self, goal: str, scene_graph: SceneGraph, task_frame: TaskFrame | None = None) -> SkillContext:
+        return SkillContext(goal=goal, scene_graph=scene_graph, task_frame=task_frame, state={"memory": self.memory.snapshot()})
 
-    def execute(self, goal: str, scene_graph: SceneGraph, nodes: List[GraphNode]) -> List[StepResult]:
-        context = self.build_context(goal, scene_graph)
+    def execute(self, goal: str, scene_graph: SceneGraph, nodes: List[GraphNode], task_frame: TaskFrame | None = None) -> List[StepResult]:
         results: List[StepResult] = []
+        current_frame = task_frame
         for node in nodes:
+            if current_frame is None and node.phase is not None:
+                current_frame = TaskFrame(goal=goal)
+            if current_frame is not None and node.phase is not None:
+                current_frame = current_frame.advance(node.phase)
+            context = self.build_context(goal, scene_graph, task_frame=current_frame)
             current = node.action(context, self.memory)
             attempt = 0
             while current.status == GraphStatus.FAILED and attempt < node.retries and node.recovery is not None:

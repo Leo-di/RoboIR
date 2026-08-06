@@ -7,6 +7,7 @@ from typing import Any, Dict, List
 
 from .graph import StepResult
 from .scene import SceneGraph
+from .embodied import TaskFrame
 
 
 @dataclass
@@ -25,8 +26,14 @@ class TraceLog:
     def add_scene(self, scene_graph: SceneGraph) -> None:
         self.add("scene", summary=scene_graph.summary())
 
-    def add_step(self, node_name: str, result: StepResult) -> None:
-        self.add("step", node=node_name, status=result.status.value, message=result.message, artifacts=result.artifacts)
+    def add_task_frame(self, task_frame: TaskFrame) -> None:
+        self.add("frame", **task_frame.summary())
+
+    def add_step(self, node_name: str, result: StepResult, phase: str | None = None) -> None:
+        payload = {"node": node_name, "status": result.status.value, "message": result.message, "artifacts": result.artifacts}
+        if phase is not None:
+            payload["phase"] = phase
+        self.add("step", **payload)
 
     def export_json(self, path: str | Path) -> None:
         path = Path(path)

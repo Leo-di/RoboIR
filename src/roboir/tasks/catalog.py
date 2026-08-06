@@ -50,4 +50,5 @@ def default_task_catalog() -> TaskCatalog:
     catalog.register(TaskPackSpec(name="lab", description="Sample handling and storage", domain="laboratory", tags=("samples", "storage", "sorting")))
     catalog.register(TaskPackSpec(name="office", description="Fetch and handoff logistics", domain="office-service", tags=("handoff", "delivery", "logistics")))
     catalog.register(TaskPackSpec(name="retail", description="Shelf restock and handoff logistics", domain="retail-service", tags=("restock", "shelf", "handoff")))
+    catalog.register(TaskPackSpec(name="deskservice", description="Desk-level industrial/service orchestration", domain="desktop-industrial-service", tags=("desk", "orchestration", "multi-step", "handoff")))
     return catalog

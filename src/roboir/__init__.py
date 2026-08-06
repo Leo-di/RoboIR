@@ -1,4 +1,5 @@
 from .affordance import Affordance, AffordanceMap
+from .embodied import ContactState, ExecutionFrame, GroundingDecision, RegionConstraint, TaskFrame, TaskPhase, TaskStateMachine, TransitionRule
 from .graph import GraphNode, GraphRuntime, GraphStatus, StepResult
 from .memory import MemoryRecord, TaskMemory
 from .planner import SkillCandidate, SkillPlanner
@@ -14,10 +15,14 @@ from .scene import SceneGraph, SceneObject, SpatialRelation
 from .trace import TraceEvent, TraceLog
 from .executor import EmbodiedExecutor, ExecutionRecord
 from .skill import SkillContext, SkillRegistry, SkillSpec
+from .tasks import build_deskservice_pack
 
 __all__ = [
     "Affordance",
     "AffordanceMap",
+    "ContactState",
+    "ExecutionFrame",
+    "GroundingDecision",
     "GraphNode",
     "GraphRuntime",
     "GraphStatus",
@@ -39,6 +44,7 @@ __all__ = [
     "RuleBasedPolicy",
     "RecoveryManager",
     "RoboIRRuntime",
+    "RegionConstraint",
     "TraceAnalyzer",
     "TraceSummary",
     "HumanInTheLoopManager",
@@ -52,7 +58,12 @@ __all__ = [
     "TraceLog",
     "EmbodiedExecutor",
     "ExecutionRecord",
+    "TaskFrame",
+    "TaskPhase",
+    "TaskStateMachine",
     "SkillContext",
     "SkillRegistry",
     "SkillSpec",
+    "TransitionRule",
+    "build_deskservice_pack",
 ]

@@ -5,6 +5,7 @@ from typing import List, Optional
 
 from .affordance import AffordanceMap
 from .analysis import TraceAnalyzer
+from .embodied import TaskFrame, TaskPhase
 from .failure import FailureClassifier, FailureLog
 from .graph import GraphNode, GraphRuntime, StepResult
 from .intervention import HumanInTheLoopManager, InterventionRequest
@@ -39,7 +40,7 @@ class RoboIRRuntime:
         category = self.failure_classifier.classify(result, node_name=node_name, goal=goal)
         self.failure_log.add(goal, node_name, category, result)
 
-    def request_intervention(self, goal: str, node_name: str, reason: str, scene_graph: SceneGraph, last_result: StepResult) -> StepResult | None:
+    def request_intervention(self, goal: str, node_name: str, reason: str, scene_graph: SceneGraph, last_result: StepResult, task_frame: TaskFrame | None = None) -> StepResult | None:
         request = InterventionRequest(
             goal=goal,
             node_name=node_name,
@@ -51,27 +52,29 @@ class RoboIRRuntime:
         )
         return self.intervention_manager.request(request)
 
-    def run_report(self, goal: str, scene_graph: SceneGraph, nodes: List[GraphNode], reset: bool = True) -> ExecutionReport:
+    def run_report(self, goal: str, scene_graph: SceneGraph, nodes: List[GraphNode], reset: bool = True, task_frame: TaskFrame | None = None) -> ExecutionReport:
         if reset:
             self.reset()
         self.trace_log.add_scene(scene_graph)
-        results = self.graph_runtime.execute(goal, scene_graph, nodes)
+        if task_frame is not None:
+            self.trace_log.add_task_frame(task_frame)
+        results = self.graph_runtime.execute(goal, scene_graph, nodes, task_frame=task_frame)
         final_results: List[StepResult] = []
-        context = self.graph_runtime.build_context(goal, scene_graph)
+        context = self.graph_runtime.build_context(goal, scene_graph, task_frame=task_frame)
         for node, result in zip(nodes, results):
             recovered = self.recovery_manager.recover(context, self.graph_runtime.memory, result)
             if recovered.status.name == "FAILED":
-                intervention = self.request_intervention(goal, node.name, "recovery_failed", scene_graph, recovered)
+                intervention = self.request_intervention(goal, node.name, "recovery_failed", scene_graph, recovered, task_frame=task_frame)
                 if intervention is not None:
                     recovered = intervention
             if recovered.status.value == "failed":
                 self._record_failure(goal, node.name, recovered)
-            self.trace_log.add_step(node.name, recovered)
+            self.trace_log.add_step(node.name, recovered, phase=node.phase.value if node.phase is not None else None)
             final_results.append(recovered)
         trace_summary = TraceAnalyzer.from_trace_log(goal=goal, trace_log=self.trace_log, scene_graph=scene_graph, memory_snapshot=self.graph_runtime.memory.snapshot()).summary()
         report = ExecutionReport(goal=goal, results=final_results, trace_summary=trace_summary, failure_log=self.failure_log)
         self.last_report = report
         return report
 
-    def run(self, goal: str, scene_graph: SceneGraph, nodes: List[GraphNode], reset: bool = True) -> List[StepResult]:
-        return self.run_report(goal=goal, scene_graph=scene_graph, nodes=nodes, reset=reset).results
+    def run(self, goal: str, scene_graph: SceneGraph, nodes: List[GraphNode], reset: bool = True, task_frame: TaskFrame | None = None) -> List[StepResult]:
+        return self.run_report(goal=goal, scene_graph=scene_graph, nodes=nodes, reset=reset, task_frame=task_frame).results

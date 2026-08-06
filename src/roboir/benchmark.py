@@ -4,6 +4,7 @@ from dataclasses import dataclass, field
 from statistics import mean
 from typing import Callable, Dict, List, Optional
 
+from .embodied import TaskFrame
 from .graph import GraphNode, GraphStatus, StepResult
 from .runtime import RoboIRRuntime
 from .scene import SceneGraph
@@ -19,6 +20,7 @@ class TaskCase:
     scene_graph: SceneGraph
     plan: List[GraphNode]
     success: Optional[SuccessPredicate] = None
+    task_frame: TaskFrame | None = None
 
 
 @dataclass(frozen=True)
@@ -62,7 +64,7 @@ class TaskBenchmark:
     def run(self, runtime: RoboIRRuntime) -> BenchmarkReport:
         outcomes: List[TaskOutcome] = []
         for case in self.cases:
-            results = runtime.run(case.goal, case.scene_graph, case.plan)
+            results = runtime.run(case.goal, case.scene_graph, case.plan, task_frame=case.task_frame)
             if case.success is None:
                 passed = all(result.status != GraphStatus.FAILED for result in results)
             else:

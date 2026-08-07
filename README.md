@@ -4,6 +4,10 @@ RoboIR is a modular embodied orchestration layer for desk-level industrial and s
 
 It connects perception, VLA policies, planning, execution, recovery, memory, and human intervention into one reusable stack.
 
+[![CI](https://github.com/Leo-di/RoboIR/actions/workflows/ci.yml/badge.svg)](https://github.com/Leo-di/RoboIR/actions/workflows/ci.yml)
+[![Issues](https://img.shields.io/github/issues/Leo-di/RoboIR)](https://github.com/Leo-di/RoboIR/issues)
+[![PRs](https://img.shields.io/github/issues-pr/Leo-di/RoboIR)](https://github.com/Leo-di/RoboIR/pulls)
+
 ## Why this repo exists
 
 Most embodied AI repos stop at a model, a benchmark, or a single demo.

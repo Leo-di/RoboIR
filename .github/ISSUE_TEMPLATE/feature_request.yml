@@ -1,0 +1,25 @@
+name: Feature request
+description: Suggest an embodied AI or framework improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What capability is missing?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the workflow, API, or scenario you want.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Why it matters
+      description: How would this help embodied AI development or adoption?
+    validations:
+      required: true

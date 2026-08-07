@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Iterable, List
+from typing import Any
 
 from .adapters.catalog import AdapterSpec, default_adapter_catalog
 from .discovery import discover_entry_point_plugins
@@ -31,6 +31,13 @@ class PortalSection:
 class PortalIndex:
     sections: tuple[PortalSection, ...]
 
+    def with_sections(self, section_names: set[str] | None = None) -> "PortalIndex":
+        if not section_names:
+            return self
+        normalized = {name.lower() for name in section_names}
+        filtered_sections = tuple(section for section in self.sections if section.name.lower() in normalized)
+        return PortalIndex(sections=filtered_sections)
+
     def records(self) -> list[dict[str, Any]]:
         return [
             {
@@ -51,11 +58,43 @@ class PortalIndex:
         ]
 
     def to_markdown(self) -> str:
-        lines = ["# RoboIR Portal", "", "A unified index for examples, templates, adapters, tasks, and plugins.", ""]
+        section_count = len(self.sections)
+        entry_count = sum(len(section.entries) for section in self.sections)
+        lines = [
+            "# RoboIR Portal",
+            "",
+            "A unified index for examples, templates, adapters, task packs, and plugins.",
+            "",
+            "## Snapshot",
+            "",
+            f"- sections: {section_count}",
+            f"- entries: {entry_count}",
+            "- best for: quick discovery, downstream reuse, and repo onboarding",
+            "",
+            "## Launch points",
+            "",
+            "```bash",
+            "roboir examples",
+            "roboir templates",
+            "roboir adapters",
+            "roboir browse",
+            "```",
+            "",
+        ]
         for section in self.sections:
-            lines.extend([f"## {section.name}", "", section.description, "", "| Name | Kind | Path | Description |", "| --- | --- | --- | --- |"])
+            lines.extend([
+                f"## {section.name}",
+                "",
+                section.description,
+                "",
+                "| Name | Kind | Path | Description |",
+                "| --- | --- | --- | --- |",
+            ])
             for entry in section.entries:
-                lines.append(f"| `{entry.name}` | `{entry.kind}` | `{entry.path}` | {entry.description} |")
+                metadata_hint = ""
+                if entry.metadata:
+                    metadata_hint = f" <sub>{', '.join(sorted(entry.metadata.keys()))}</sub>"
+                lines.append(f"| `{entry.name}` | `{entry.kind}` | `{entry.path}` | {entry.description}{metadata_hint} |")
             lines.append("")
         return "\n".join(lines)
 
@@ -149,3 +188,7 @@ def default_portal_index() -> PortalIndex:
             ),
         ),
     )
+
+
+def portal_sections() -> list[str]:
+    return ["Examples", "Templates", "Adapters", "Task Packs", "Plugins"]

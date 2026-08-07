@@ -1,6 +1,16 @@
 # RoboIR Portal
 
-The portal is the unified index for everything a new user should try first.
+The portal is the unified landing page for people exploring RoboIR for the first time.
+
+## Why it matters
+
+High-star robotics repos usually do three things well:
+
+- keep the homepage short
+- point to the first useful command immediately
+- show a clean extension surface
+
+RoboIR follows that pattern with a single portal for discovery.
 
 ## Sections
 
@@ -14,11 +24,16 @@ The portal is the unified index for everything a new user should try first.
 
 ```bash
 roboir browse
+roboir browse --section Examples
+roboir browse --section Templates
 roboir examples
 roboir templates
 roboir adapters
 ```
 
-## Why it matters
+## Recommended path
 
-A single portal makes the repository easier to discover, easier to explain, and easier to ship through more channels.
+1. run `roboir run --pack deskservice --adapter mock`
+2. open `roboir browse`
+3. copy a template into a downstream package
+4. extend with your own skills, adapters, or task packs

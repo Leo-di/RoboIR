@@ -11,7 +11,7 @@ from .embodied import TaskFrame, TaskPhase
 from .executor import EmbodiedExecutor
 from .examples import default_example_catalog, examples_markdown, examples_records
 from .report import ExecutionReport
-from .portal import default_portal_index
+from .portal import default_portal_index, portal_sections
 from .scene import SceneGraph
 from .suite import TaskSuite
 from .templates import default_template_catalog, templates_markdown, templates_records
@@ -83,6 +83,7 @@ def build_parser() -> argparse.ArgumentParser:
     examples_parser.add_argument("--markdown", type=Path, default=None, help="Optional markdown output path")
 
     browse_parser = subparsers.add_parser("browse", help="Browse the unified RoboIR portal")
+    browse_parser.add_argument("--section", choices=portal_sections(), action="append", default=None, help="Optional section filter; repeat to include multiple sections")
     browse_parser.add_argument("--json", type=Path, default=None, help="Optional JSON output path")
     browse_parser.add_argument("--markdown", type=Path, default=None, help="Optional markdown output path")
 
@@ -329,6 +330,8 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.command == "browse":
         portal = default_portal_index()
+        if args.section is not None:
+            portal = portal.with_sections(set(args.section))
         payload = portal.records()
         print(portal.to_markdown())
         if args.json is not None:

@@ -12,6 +12,12 @@ license = { text = "MIT" }
 authors = [{ name = "Codex" }]
 dependencies = []
 
+[project.urls]
+Homepage = "https://github.com/Leo-di/RoboIR"
+Repository = "https://github.com/Leo-di/RoboIR"
+Issues = "https://github.com/Leo-di/RoboIR/issues"
+Citation = "https://github.com/Leo-di/RoboIR/blob/main/CITATION.cff"
+
 [project.optional-dependencies]
 dev = ["pytest>=8"]
 

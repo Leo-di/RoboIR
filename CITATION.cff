@@ -1,0 +1,11 @@
+# YAML 1.2
+cff-version: 1.2.0
+title: RoboIR
+message: >-
+  If you use RoboIR in research or downstream systems, please cite this repository.
+authors:
+  - family-names: Leo-di
+    given-names: Leo
+year: 2026
+license: MIT
+repository-code: https://github.com/Leo-di/RoboIR

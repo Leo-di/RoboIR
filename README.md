@@ -7,6 +7,14 @@ It connects perception, VLA policies, planning, execution, recovery, memory, and
 [![CI](https://github.com/Leo-di/RoboIR/actions/workflows/ci.yml/badge.svg)](https://github.com/Leo-di/RoboIR/actions/workflows/ci.yml)
 [![Issues](https://img.shields.io/github/issues/Leo-di/RoboIR)](https://github.com/Leo-di/RoboIR/issues)
 [![PRs](https://img.shields.io/github/issues-pr/Leo-di/RoboIR)](https://github.com/Leo-di/RoboIR/pulls)
+[![License](https://img.shields.io/github/license/Leo-di/RoboIR)](./LICENSE)
+
+## Repo Map
+
+- `LICENSE` — MIT license
+- `CITATION.cff` — citation metadata
+- `SECURITY.md` — vulnerability reporting guidance
+- `CODE_OF_CONDUCT.md` — collaboration norms
 
 ## Why this repo exists
 

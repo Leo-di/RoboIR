@@ -4,6 +4,7 @@ from .deskservice import build_deskservice_pack
 from .lab import build_lab_pack
 from .office import build_office_pack
 from .retail import build_retail_pack
+from .template import build_task_pack_template
 from .workcell import build_workcell_pack
 
 PACK_BUILDERS = {
@@ -34,6 +35,7 @@ __all__ = [
     "build_lab_pack",
     "build_office_pack",
     "build_retail_pack",
+    "build_task_pack_template",
     "build_deskservice_pack",
     "PACK_BUILDERS",
 ]

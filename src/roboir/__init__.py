@@ -15,6 +15,7 @@ from .scene import SceneGraph, SceneObject, SpatialRelation
 from .trace import TraceEvent, TraceLog
 from .executor import EmbodiedExecutor, ExecutionRecord
 from .skill import SkillContext, SkillRegistry, SkillSpec
+from .visualization import scene_graph_to_mermaid, trace_to_mermaid
 from .tasks import build_deskservice_pack
 
 __all__ = [
@@ -56,6 +57,8 @@ __all__ = [
     "SpatialRelation",
     "TraceEvent",
     "TraceLog",
+    "scene_graph_to_mermaid",
+    "trace_to_mermaid",
     "EmbodiedExecutor",
     "ExecutionRecord",
     "TaskFrame",

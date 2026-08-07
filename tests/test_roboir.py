@@ -1,4 +1,6 @@
 from pathlib import Path
+import subprocess
+import sys
 
 from roboir import Affordance, AffordanceMap, GraphNode, GraphRuntime, GraphStatus, HumanInTheLoopManager, InterventionRequest, Pose6D, RegionConstraint, RoboIRRuntime, SceneGraph, SceneObject, SkillPlanner, SkillRegistry, SkillSpec, StepResult, SpatialMemory, TaskFrame, TaskPhase, TraceAnalyzer, TraceLog, build_deskservice_pack
 from roboir.adapters import IsaacSimAdapter, Ros2Adapter, ScriptedSimAdapter
@@ -220,3 +222,101 @@ def test_suite_and_benchmark_markdown():
     suite_report = suite.run()
     assert "Suite Report" in suite_report.to_markdown()
     assert suite_report.to_dict()["outcomes"][0]["pack_name"] == "deskservice"
+
+
+def test_cli_run_command(tmp_path: Path):
+    report_path = tmp_path / "run.json"
+    result = subprocess.run(
+        [sys.executable, "-m", "roboir", "run", "--pack", "deskservice", "--adapter", "mock", "--json", str(report_path)],
+        cwd=Path(__file__).resolve().parent.parent,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert report_path.exists()
+    assert "deskservice" in result.stdout
+
+
+def test_scene_roundtrip(tmp_path: Path):
+    scene_path = tmp_path / "scene.json"
+    result = subprocess.run(
+        [sys.executable, "-m", "roboir", "scene", "--pack", "deskservice", "--output", str(scene_path)],
+        cwd=Path(__file__).resolve().parent.parent,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert scene_path.exists()
+    assert "object_count" in result.stdout
+
+    result = subprocess.run(
+        [sys.executable, "-m", "roboir", "scene", "--input", str(scene_path)],
+        cwd=Path(__file__).resolve().parent.parent,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert "relations" in result.stdout
+
+
+def test_adapter_and_report_commands(tmp_path: Path):
+    adapters_markdown = tmp_path / "adapters.md"
+    report_json = tmp_path / "report.json"
+
+    result = subprocess.run(
+        [sys.executable, "-m", "roboir", "adapters", "--markdown", str(adapters_markdown)],
+        cwd=Path(__file__).resolve().parent.parent,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert adapters_markdown.exists()
+    assert "mock" in result.stdout
+
+    result = subprocess.run(
+        [sys.executable, "-m", "roboir", "report", "--pack", "deskservice", "--json", str(report_json)],
+        cwd=Path(__file__).resolve().parent.parent,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert report_json.exists()
+    assert "Execution Report" in result.stdout
+
+
+def test_demo_and_benchmark_markdown(tmp_path: Path):
+    demo_markdown = tmp_path / "demo.md"
+    benchmark_markdown = tmp_path / "benchmark.md"
+
+    result = subprocess.run(
+        [sys.executable, "-m", "roboir", "demo", "--pack", "deskservice", "--markdown", str(demo_markdown)],
+        cwd=Path(__file__).resolve().parent.parent,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert demo_markdown.exists()
+    assert "workspace scanned" in result.stdout
+
+    result = subprocess.run(
+        [sys.executable, "-m", "roboir", "benchmark", "--pack", "deskservice", "--markdown", str(benchmark_markdown)],
+        cwd=Path(__file__).resolve().parent.parent,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert benchmark_markdown.exists()
+    assert "Benchmark Report" in benchmark_markdown.read_text(encoding="utf-8")
+
+
+def test_visualize_command(tmp_path: Path):
+    mermaid_path = tmp_path / "scene.mmd"
+    result = subprocess.run(
+        [sys.executable, "-m", "roboir", "visualize", "--pack", "deskservice", "--kind", "scene", "--output", str(mermaid_path)],
+        cwd=Path(__file__).resolve().parent.parent,
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    assert mermaid_path.exists()
+    assert "flowchart TD" in result.stdout

@@ -6,6 +6,12 @@
 2. **Adapters** — connect execution to simulators or robots
 3. **Task packs** — package a domain-specific scene, plan, and benchmark together
 
+For a copy-paste plugin skeleton, see [`docs/PLUGIN_TEMPLATE.md`](PLUGIN_TEMPLATE.md).
+For a copy-paste task pack skeleton, see [`docs/TASK_TEMPLATE.md`](TASK_TEMPLATE.md) and `src/roboir/tasks/template.py`.
+For a copy-paste adapter skeleton, see [`docs/ADAPTER_TEMPLATE.md`](ADAPTER_TEMPLATE.md) and `src/roboir/adapters/template.py`.
+Use `roboir templates` to list all template modules in one place.
+Use `roboir browse` to see the unified portal for the whole repository.
+
 ## Plugin surface
 
 A plugin exposes a `register()` method and can be discovered either from an entry point or by loading a module that exports `PLUGIN` or `build_plugin()`.
@@ -37,3 +43,17 @@ Task packs bind together:
 - a runtime with plugins installed
 
 The `deskservice` pack is the most representative desktop industrial/service example in this repo.
+
+## Template module
+
+`src/roboir_plugins/template.py` is a minimal plugin skeleton you can copy into a downstream repository.
+
+`src/roboir/tasks/template.py` is a minimal task-pack skeleton you can copy into a downstream repository.
+
+`src/roboir/adapters/template.py` is a minimal adapter skeleton you can copy into a downstream repository.
+
+## Where to start
+
+- for a new domain, copy the `deskservice` pack pattern
+- for a new backend, add an adapter and register it in the factory
+- for a new reusable capability, package it as a plugin

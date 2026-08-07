@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+import json
+from dataclasses import asdict, dataclass, field
+from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional
 
 
@@ -50,3 +52,28 @@ class SceneGraph:
             "relation_count": len(self.relations),
             "categories": sorted({scene_object.category for scene_object in self.objects.values()}),
         }
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "summary": self.summary(),
+            "objects": [asdict(scene_object) for scene_object in self.objects.values()],
+            "relations": [asdict(relation) for relation in self.relations],
+        }
+
+    @classmethod
+    def from_dict(cls, payload: Dict[str, Any]) -> "SceneGraph":
+        graph = cls()
+        for item in payload.get("objects", []):
+            graph.add_object(SceneObject(**item))
+        for item in payload.get("relations", []):
+            graph.add_relation(SpatialRelation(**item))
+        return graph
+
+    def save_json(self, path: str | Path) -> None:
+        path = Path(path)
+        path.write_text(json.dumps(self.to_dict(), ensure_ascii=False, indent=2), encoding="utf-8")
+
+    @classmethod
+    def load_json(cls, path: str | Path) -> "SceneGraph":
+        path = Path(path)
+        return cls.from_dict(json.loads(path.read_text(encoding="utf-8")))

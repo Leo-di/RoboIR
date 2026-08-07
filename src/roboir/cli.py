@@ -8,6 +8,7 @@ from .analysis import TraceAnalyzer
 from .report import ExecutionReport
 from .suite import TaskSuite
 from .tasks import PACK_BUILDERS, build_task_pack, default_task_catalog
+from .discovery import discover_entry_point_plugins
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -38,6 +39,9 @@ def build_parser() -> argparse.ArgumentParser:
     catalog_parser = subparsers.add_parser("catalog", help="List available task packs")
     catalog_parser.add_argument("--json", type=Path, default=None, help="Optional JSON output path")
     catalog_parser.add_argument("--markdown", type=Path, default=None, help="Optional markdown output path")
+
+    plugins_parser = subparsers.add_parser("plugins", help="List discovered plugins")
+    plugins_parser.add_argument("--json", type=Path, default=None, help="Optional JSON output path")
 
     return parser
 
@@ -75,7 +79,7 @@ def main(argv: list[str] | None = None) -> int:
         summary = report.summary()
         print(summary)
         if args.json is not None:
-            _write_output(args.json, json.dumps(summary, ensure_ascii=False, indent=2))
+            _write_output(args.json, json.dumps(report.to_dict(), ensure_ascii=False, indent=2))
         return 0
 
     if args.command == "export":
@@ -100,6 +104,14 @@ def main(argv: list[str] | None = None) -> int:
             _write_output(args.json, json.dumps(catalog.records(), ensure_ascii=False, indent=2))
         if args.markdown is not None:
             _write_output(args.markdown, catalog.to_markdown())
+        return 0
+
+    if args.command == "plugins":
+        plugins = discover_entry_point_plugins()
+        payload = [{"name": plugin.name, "type": plugin.__class__.__name__} for plugin in plugins]
+        print(payload)
+        if args.json is not None:
+            _write_output(args.json, json.dumps(payload, ensure_ascii=False, indent=2))
         return 0
 
     return 1

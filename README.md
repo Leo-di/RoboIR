@@ -42,6 +42,10 @@ src/roboir/
   dataset.py      Trace dataset export/import
   plugins.py      Default embodied plugin packs
   tasks/          Domain task packs: workcell, lab, office, retail, deskservice
+src/roboir_plugins/
+  deskservice.py  Entry-point plugin example for external installs
+docs/
+  EXTENDING.md    Plugin, adapter, and task-pack extension notes
 ```
 
 ## Quick start
@@ -54,6 +58,7 @@ roboir catalog
 roboir demo --pack deskservice
 roboir benchmark --pack deskservice
 roboir suite --packs workcell lab office retail deskservice
+roboir plugins
 pytest
 ```
 
@@ -67,6 +72,17 @@ It models a desktop industrial/service workflow with:
 - contact-mode-aware skills
 - routing from pickup zone to transfer lane to tray zone
 - traceable memory and benchmarkable multi-step execution
+
+## Adapters and plugins
+
+`RoboIR` now includes adapter stubs for:
+
+- `mock` for tests and examples
+- `sim` for scripted simulator-style runs
+- `ros2` for ROS-style command publication
+- `isaac_sim` for Isaac Sim-shaped integration
+
+It also exposes an entry-point plugin surface so external packs can register skills and affordances without editing the core repo.
 
 ## Example
 

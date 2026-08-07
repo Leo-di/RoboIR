@@ -1,6 +1,7 @@
 from pathlib import Path
 
-from roboir import Affordance, AffordanceMap, GraphNode, GraphRuntime, GraphStatus, HumanInTheLoopManager, InterventionRequest, Pose6D, RoboIRRuntime, SceneGraph, SceneObject, SkillPlanner, SkillRegistry, SkillSpec, StepResult, SpatialMemory, TraceAnalyzer, TraceLog
+from roboir import Affordance, AffordanceMap, GraphNode, GraphRuntime, GraphStatus, HumanInTheLoopManager, InterventionRequest, Pose6D, RegionConstraint, RoboIRRuntime, SceneGraph, SceneObject, SkillPlanner, SkillRegistry, SkillSpec, StepResult, SpatialMemory, TaskFrame, TaskPhase, TraceAnalyzer, TraceLog, build_deskservice_pack
+from roboir.adapters import IsaacSimAdapter, Ros2Adapter, ScriptedSimAdapter
 from roboir.analysis import TraceSummary
 from roboir.benchmark import TaskBenchmark, TaskCase
 from roboir.dataset import TraceDataset
@@ -122,6 +123,34 @@ def test_policy_decision():
     assert decision.candidate is not None
 
 
+def test_task_frame_and_deskservice_pack():
+    pack = build_task_pack("deskservice")
+    frame = TaskFrame(
+        goal="desk assembly handoff",
+        pack="deskservice",
+        phase=TaskPhase.OBSERVE,
+        target_object_ids=("desk_1",),
+        region_constraints=(RegionConstraint(name="pickup_zone", spatial_hint="table-left"),),
+    )
+    decision = SkillPlanner(pack.runtime.graph_runtime.skill_registry).decide(pack.scene_graph, pack.runtime.affordance_map.affordances, task_frame=frame)
+    assert decision is not None
+    report = pack.runtime.run_report(goal=pack.name, scene_graph=pack.scene_graph, nodes=pack.plan, task_frame=frame)
+    assert report.trace_summary is not None
+    assert report.trace_summary.step_count >= 1
+
+
+def test_adapter_stubs():
+    sim = ScriptedSimAdapter()
+    assert sim.observe().payload["status"] == "idle"
+    assert sim.execute(type("C", (), {"skill_name": "pick", "parameters": {}})()).success is True
+
+    ros2 = Ros2Adapter()
+    assert ros2.observe().payload["backend"] == "ros2"
+
+    isaac = IsaacSimAdapter()
+    assert isaac.observe().payload["backend"] == "isaac_sim"
+
+
 def test_workcell_pack_and_benchmark():
     pack = build_task_pack("workcell")
     report = pack.benchmark.run(pack.runtime)
@@ -176,7 +205,18 @@ def test_execution_report_and_classifier():
     report = ExecutionReport(goal="pick cup", results=[StepResult(GraphStatus.SUCCESS, "picked")], trace_summary=summary, failure_log=failure_log)
     assert report.success_count == 1
     assert report.summary()["goal"] == "pick cup"
+    assert len(report.to_table()) == 1
 
     classifier = FailureClassifier()
     category = classifier.classify(StepResult(GraphStatus.FAILED, "grasp failed", artifacts={"failure_category": "affordance"}))
     assert category is FailureCategory.AFFORDANCE
+
+
+def test_suite_and_benchmark_markdown():
+    pack = build_task_pack("deskservice")
+    benchmark_report = pack.benchmark.run(pack.runtime)
+    assert "Benchmark Report" in benchmark_report.to_markdown()
+    suite = TaskSuite(["deskservice"])
+    suite_report = suite.run()
+    assert "Suite Report" in suite_report.to_markdown()
+    assert suite_report.to_dict()["outcomes"][0]["pack_name"] == "deskservice"

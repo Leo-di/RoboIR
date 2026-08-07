@@ -23,10 +23,18 @@ def load_plugin_from_module(module_name: str) -> Plugin | None:
 
 def discover_entry_point_plugins(group: str = "roboir.plugins") -> List[Plugin]:
     discovered: List[Plugin] = []
-    for entry_point in metadata.entry_points(group=group):
+    try:
+        entry_points = metadata.entry_points(group=group)
+    except TypeError:
+        entry_points = metadata.entry_points().select(group=group)
+    for entry_point in entry_points:
         plugin = entry_point.load()
         if hasattr(plugin, "register") and hasattr(plugin, "name"):
             discovered.append(plugin)
+    if not discovered:
+        fallback = load_plugin_from_module("roboir_plugins.deskservice")
+        if fallback is not None:
+            discovered.append(fallback)
     return discovered
 
 

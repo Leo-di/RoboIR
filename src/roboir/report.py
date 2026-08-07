@@ -60,6 +60,17 @@ class ExecutionReport:
             lines.append(f"- {index}. `{result.status.value}` — {result.message}")
         return "\n".join(lines)
 
+    def to_table(self) -> list[dict[str, object]]:
+        return [
+            {
+                "index": index,
+                "status": result.status.value,
+                "message": result.message,
+                "artifacts": result.artifacts,
+            }
+            for index, result in enumerate(self.results, start=1)
+        ]
+
     def export_json(self, path: str | Path) -> None:
         path = Path(path)
         path.write_text(json.dumps(self.to_dict(), ensure_ascii=False, indent=2), encoding="utf-8")

@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+import json
 from statistics import mean
+from pathlib import Path
 from typing import List
 
 from .benchmark import BenchmarkReport
@@ -29,6 +31,32 @@ class SuiteReport:
             "average_score": self.average_score,
             "suite_size": float(len(self.outcomes)),
         }
+
+    def to_dict(self) -> dict[str, object]:
+        return {
+            "summary": self.summary(),
+            "outcomes": [
+                {
+                    "pack_name": outcome.pack_name,
+                    "report": outcome.report.summary(),
+                }
+                for outcome in self.outcomes
+            ],
+        }
+
+    def to_markdown(self) -> str:
+        lines = ["# Suite Report", ""]
+        for key, value in self.summary().items():
+            lines.append(f"- {key}: {value}")
+        lines.append("")
+        lines.append("## Packs")
+        for outcome in self.outcomes:
+            lines.append(f"- `{outcome.pack_name}` — score {outcome.report.score:.3f}, tasks {len(outcome.report.outcomes)}")
+        return "\n".join(lines)
+
+    def export_json(self, path: str | Path) -> None:
+        path = Path(path)
+        path.write_text(json.dumps(self.to_dict(), ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 @dataclass

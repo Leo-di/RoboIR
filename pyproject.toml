@@ -15,6 +15,9 @@ dependencies = []
 [project.optional-dependencies]
 dev = ["pytest>=8"]
 
+[project.entry-points."roboir.plugins"]
+deskservice = "roboir_plugins.deskservice:PLUGIN"
+
 [project.scripts]
 roboir = "roboir.cli:main"
 
@@ -23,3 +26,6 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"*" = ["*.md"]

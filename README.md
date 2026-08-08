@@ -100,6 +100,7 @@ docs/
 ## Docs
 
 - `mkdocs.yml`
+- `docs/index.md`
 - `docs/README.md`
 - `docs/HOME.md`
 - `docs/GETTING_STARTED.md`

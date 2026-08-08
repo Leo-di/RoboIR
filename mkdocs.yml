@@ -1,0 +1,25 @@
+site_name: RoboIR
+site_description: Modular embodied orchestration layer for desk-level robotics
+site_url: https://github.com/Leo-di/RoboIR
+repo_url: https://github.com/Leo-di/RoboIR
+repo_name: Leo-di/RoboIR
+edit_uri: edit/main/docs/
+nav:
+  - Home: docs/README.md
+  - Getting Started: docs/GETTING_STARTED.md
+  - Portal: docs/PORTAL.md
+  - Architecture: docs/ARCHITECTURE.md
+  - Extending: docs/EXTENDING.md
+  - Roadmap: docs/ROADMAP.md
+  - Contributing: docs/CONTRIBUTING.md
+  - Templates:
+      - Plugin Template: docs/PLUGIN_TEMPLATE.md
+      - Adapter Template: docs/ADAPTER_TEMPLATE.md
+      - Task Template: docs/TASK_TEMPLATE.md
+  - Examples: examples/README.md
+  - README: README.md
+markdown_extensions:
+  - admonition
+  - codehilite
+  - toc:
+      permalink: true

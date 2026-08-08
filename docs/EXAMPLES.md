@@ -1,23 +1,35 @@
 # Examples
 
-The example suite is organized around real workflow shapes, not just demo scripts.
+The example suite is organized around embodied workflow shapes.
 
-## Featured scenarios
+## Channels
 
-- **Desk-service execution** — a compact end-to-end flow for desk-level service tasks
-- **Graph orchestration** — a phased Observe → Reason → Plan → Verify → Recover → Execute loop
-- **Industrial workcell** — skill routing and trace export for a warehouse or cell-like workflow
-- **Recovery** — failure handling and intervention behavior
-- **Benchmark** — repeatable packs for evaluation
+### Desk Service
 
-## Recommended order
+- `run_deskservice`
+- `deskservice_orchestration`
 
-1. [`run_deskservice`](../examples/run_deskservice.py)
-2. [`deskservice_orchestration`](../examples/deskservice_orchestration.py)
-3. [`workcell_kitting`](../examples/workcell_kitting.py)
-4. [`recovery_demo`](../examples/recovery_demo.py)
-5. benchmark scripts
+### Industrial Cell
 
-## Example index
+- `workcell_kitting`
+- `benchmark_workcell`
 
-See [`examples/README.md`](../examples/README.md) for the complete table.
+### Office and Lab
+
+- `benchmark_lab`
+- `benchmark_office`
+
+### Recovery and Verification
+
+- `recovery_demo`
+
+## Best first run
+
+```bash
+roboir run --pack deskservice --adapter mock
+python examples/run_deskservice.py
+```
+
+## Full index
+
+See [`examples/README.md`](../examples/README.md) for the table view.

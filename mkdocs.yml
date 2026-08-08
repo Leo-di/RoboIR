@@ -17,7 +17,6 @@ nav:
       - Plugin Template: docs/PLUGIN_TEMPLATE.md
       - Adapter Template: docs/ADAPTER_TEMPLATE.md
       - Task Template: docs/TASK_TEMPLATE.md
-  - Examples: examples/README.md
   - README: README.md
 markdown_extensions:
   - admonition

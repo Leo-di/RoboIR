@@ -8,7 +8,9 @@ nav:
   - Home: docs/index.md
   - Getting Started: docs/GETTING_STARTED.md
   - Capabilities: docs/CAPABILITIES.md
+  - Commands: docs/COMMANDS.md
   - Features: docs/FEATURES.md
+  - Integrations: docs/INTEGRATIONS.md
   - Use Cases: docs/USE_CASES.md
   - Portal: docs/PORTAL.md
   - Architecture: docs/ARCHITECTURE.md

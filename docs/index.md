@@ -32,7 +32,9 @@ roboir templates
 
 - [`Getting Started`](GETTING_STARTED.md)
 - [`Capabilities`](CAPABILITIES.md)
+- [`Commands`](COMMANDS.md)
 - [`Features`](FEATURES.md)
+- [`Integrations`](INTEGRATIONS.md)
 - [`Use Cases`](USE_CASES.md)
 - [`Portal`](PORTAL.md)
 - [`Examples`](EXAMPLES.md)
@@ -44,15 +46,17 @@ roboir templates
 1. [`Docs Home`](README.md)
 2. [`Examples`](EXAMPLES.md)
 3. [`Capabilities`](CAPABILITIES.md)
-4. [`Features`](FEATURES.md)
-5. [`Use Cases`](USE_CASES.md)
+4. [`Commands`](COMMANDS.md)
+5. [`Features`](FEATURES.md)
 
 ## Repository map
 
 - [`README`](../README.md)
 - [`Docs Home`](README.md)
 - [`Capabilities`](CAPABILITIES.md)
+- [`Commands`](COMMANDS.md)
 - [`Features`](FEATURES.md)
+- [`Integrations`](INTEGRATIONS.md)
 - [`Use Cases`](USE_CASES.md)
 - [`Portal`](PORTAL.md)
 - [`Examples`](EXAMPLES.md)

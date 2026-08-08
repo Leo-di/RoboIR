@@ -105,7 +105,12 @@ docs/
 - `docs/HOME.md`
 - `docs/GETTING_STARTED.md`
 - `docs/ARCHITECTURE.md`
+- `docs/CAPABILITIES.md`
+- `docs/COMMANDS.md`
 - `docs/PORTAL.md`
+- `docs/FEATURES.md`
+- `docs/INTEGRATIONS.md`
+- `docs/USE_CASES.md`
 - `docs/EXTENDING.md`
 - `docs/ROADMAP.md`
 

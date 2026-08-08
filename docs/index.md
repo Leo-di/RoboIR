@@ -31,6 +31,7 @@ roboir templates
 ## Featured entry points
 
 - [`Getting Started`](GETTING_STARTED.md)
+- [`Capabilities`](CAPABILITIES.md)
 - [`Features`](FEATURES.md)
 - [`Use Cases`](USE_CASES.md)
 - [`Portal`](PORTAL.md)
@@ -42,14 +43,15 @@ roboir templates
 
 1. [`Docs Home`](README.md)
 2. [`Examples`](EXAMPLES.md)
-3. [`Features`](FEATURES.md)
-4. [`Use Cases`](USE_CASES.md)
-5. [`Portal`](PORTAL.md)
+3. [`Capabilities`](CAPABILITIES.md)
+4. [`Features`](FEATURES.md)
+5. [`Use Cases`](USE_CASES.md)
 
 ## Repository map
 
 - [`README`](../README.md)
 - [`Docs Home`](README.md)
+- [`Capabilities`](CAPABILITIES.md)
 - [`Features`](FEATURES.md)
 - [`Use Cases`](USE_CASES.md)
 - [`Portal`](PORTAL.md)

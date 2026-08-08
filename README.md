@@ -99,6 +99,8 @@ docs/
 
 ## Docs
 
+- `docs/README.md`
+- `docs/HOME.md`
 - `docs/GETTING_STARTED.md`
 - `docs/ARCHITECTURE.md`
 - `docs/PORTAL.md`

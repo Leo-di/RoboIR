@@ -1,6 +1,8 @@
 # Architecture
 
-RoboIR is organized as a small embodied orchestration stack.
+RoboIR is organized as a small embodied orchestration stack for desk-level industrial and service robotics.
+
+The design goal is to keep the framework usable as infrastructure, not as a one-off demo.
 
 ## Data flow
 
@@ -39,3 +41,10 @@ RoboIR is intentionally plugin-first:
 - plugins register skills and affordances
 - adapters isolate the backend execution surface
 - reports and datasets are generated from the same runtime trace
+
+## What this enables
+
+- reusable skill libraries for embodied tasks
+- graph-driven orchestration instead of single-shot prompting
+- adapter-backed execution for mock, sim, and robot surfaces
+- traceable outputs that support evaluation and downstream reuse

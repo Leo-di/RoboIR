@@ -2,6 +2,8 @@
 
 The portal is the unified landing page for people exploring RoboIR for the first time.
 
+It is meant to behave like a site homepage for the repository: short, navigable, and action-oriented.
+
 ## Why it matters
 
 High-star robotics repos usually do three things well:
@@ -37,3 +39,9 @@ roboir adapters
 2. open `roboir browse`
 3. copy a template into a downstream package
 4. extend with your own skills, adapters, or task packs
+
+## Site map
+
+- `docs/README.md` for the docs home
+- `docs/HOME.md` for the quickest reading path
+- `README.md` for the repository front page

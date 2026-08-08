@@ -28,18 +28,30 @@ roboir templates
 - failure recovery and intervention
 - benchmarkable embodied workflows
 
-## Start here
+## Featured entry points
 
-1. [`Getting Started`](GETTING_STARTED.md)
-2. [`Portal`](PORTAL.md)
-3. [`Examples`](EXAMPLES.md)
-4. [`Architecture`](ARCHITECTURE.md)
-5. [`Extending`](EXTENDING.md)
+- [`Getting Started`](GETTING_STARTED.md)
+- [`Features`](FEATURES.md)
+- [`Use Cases`](USE_CASES.md)
+- [`Portal`](PORTAL.md)
+- [`Examples`](EXAMPLES.md)
+- [`Architecture`](ARCHITECTURE.md)
+- [`Extending`](EXTENDING.md)
+
+## Best first paths
+
+1. [`Docs Home`](README.md)
+2. [`Examples`](EXAMPLES.md)
+3. [`Features`](FEATURES.md)
+4. [`Use Cases`](USE_CASES.md)
+5. [`Portal`](PORTAL.md)
 
 ## Repository map
 
 - [`README`](../README.md)
 - [`Docs Home`](README.md)
+- [`Features`](FEATURES.md)
+- [`Use Cases`](USE_CASES.md)
 - [`Portal`](PORTAL.md)
 - [`Examples`](EXAMPLES.md)
 - [`Roadmap`](ROADMAP.md)

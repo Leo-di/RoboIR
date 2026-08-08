@@ -7,6 +7,8 @@ edit_uri: edit/main/docs/
 nav:
   - Home: docs/index.md
   - Getting Started: docs/GETTING_STARTED.md
+  - Features: docs/FEATURES.md
+  - Use Cases: docs/USE_CASES.md
   - Portal: docs/PORTAL.md
   - Architecture: docs/ARCHITECTURE.md
   - Extending: docs/EXTENDING.md

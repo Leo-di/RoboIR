@@ -1,35 +1,35 @@
-# 示例
+# Examples
 
-示例集围绕具身工作流组织，而不是单纯的演示脚本。
+The example suite is organized around embodied workflow shapes.
 
-## 场景频道
+## Channels
 
-### 桌面服务
+### Desk Service
 
 - `run_deskservice`
 - `deskservice_orchestration`
 
-### 工业工位
+### Industrial Cell
 
 - `workcell_kitting`
 - `benchmark_workcell`
 
-### 办公与实验室
+### Office and Lab
 
 - `benchmark_lab`
 - `benchmark_office`
 
-### 恢复与验证
+### Recovery and Verification
 
 - `recovery_demo`
 
-## 最佳首跑
+## Best first run
 
 ```bash
 roboir run --pack deskservice --adapter mock
 python examples/run_deskservice.py
 ```
 
-## 完整索引
+## Full index
 
-参见 [`examples/README.md`](../examples/README.md) 的表格视图。
+See [`examples/README.md`](../examples/README.md) for the table view.

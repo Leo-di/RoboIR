@@ -1,19 +1,19 @@
-# 使用场景
+# Use Cases
 
-RoboIR 面向的不只是单次策略调用，而是需要完整工作流的具身任务。
+RoboIR is designed for embodied workflows that need more than a single policy call.
 
-## 桌面服务
+## Desk service
 
-一个紧凑的服务流程，机器人需要在桌面级环境中理解、规划、执行并恢复。
+A compact service workflow where a robot has to interpret, plan, execute, and recover across a desk-level environment.
 
-## 工业工位
+## Industrial workcell
 
-一个依赖可复用技能、轨迹导出和可重复评估的任务路由流程。
+A task-routing workflow that benefits from reusable skills, trace export, and repeatable evaluation.
 
-## 恢复流程
+## Recovery workflows
 
-一个强调验证和人工介入与动作选择同等重要的故障处理流程。
+A failure-aware pipeline where verification and intervention matter as much as action selection.
 
-## 基准评测
+## Benchmarking
 
-用于比较任务包、适配器和编排策略的可重复评估路径。
+A repeatable evaluation path for comparing task packs, adapters, and orchestration strategies.

@@ -1,17 +1,16 @@
-# RoboIR 文档首页
+# RoboIR Home
 
-欢迎来到 RoboIR 的文档。
+RoboIR is designed as a reusable embodied orchestration layer for desk-level industrial and service robotics.
 
-## 快速路径
+## Fast path
 
-1. 安装项目
-2. 运行 `roboir run --pack deskservice --adapter mock`
-3. 打开 `roboir browse`
-4. 复制模板并继续扩展
+1. run `roboir run --pack deskservice --adapter mock`
+2. browse `roboir browse`
+3. copy an extension template
+4. add your own pack, adapter, or plugin
 
-## 最佳入口
+## What to read next
 
-- [`入门`](GETTING_STARTED.md)
-- [`门户`](PORTAL.md)
-- [`架构`](ARCHITECTURE.md)
-- [`扩展`](EXTENDING.md)
+- [`docs/README.md`](README.md)
+- [`docs/PORTAL.md`](PORTAL.md)
+- [`docs/ARCHITECTURE.md`](ARCHITECTURE.md)

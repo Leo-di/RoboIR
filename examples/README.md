@@ -1,75 +1,67 @@
-# RoboIR 示例
+# RoboIR Examples
 
-RoboIR 示例围绕具身编排、技能路由、恢复和基准流程来组织。
+Runnable examples for embodied orchestration, skill routing, recovery, and benchmark flows.
 
-## 快速入口
+## Quick path
 
-| 路径 | 展示内容 | 价值 |
+| Path | What it shows | Why it matters |
 | --- | --- | --- |
-| `examples/run_deskservice.py` | 桌面服务执行 | 最短的可运行演示路径 |
-| `examples/deskservice_orchestration.py` | 图编排 | 展示带恢复的分阶段编排 |
-| `examples/workcell_kitting.py` | 工业工位 | 展示技能路由与轨迹导出 |
+| `examples/run_deskservice.py` | desk-service execution | shortest path to a working demo |
+| `examples/deskservice_orchestration.py` | graph orchestration | shows phased orchestration with recovery |
+| `examples/workcell_kitting.py` | industrial workcell | shows skill routing and trace export |
 
-## 任务导览
+## Task guide
 
-### 1. 桌面服务
+### 1. Desk service
 
-从最小的端到端流程开始：
+Start with the smallest end-to-end flow:
 
-- `run_deskservice` — 完整的桌面服务运行
-- `deskservice_orchestration` — 带运行时阶段的基于图编排
+- `run_deskservice` — a complete desk-service run
+- `deskservice_orchestration` — graph-based orchestration with runtime phases
 
-### 2. 工业工位
+### 2. Industrial cell
 
-进入更结构化的具身工作流：
+Move to a more structured embodied workflow:
 
-- `workcell_kitting` — 技能路由与轨迹导出
-- `benchmark_workcell` — 同一任务包的基准运行
+- `workcell_kitting` — skill routing and trace export
+- `benchmark_workcell` — benchmark run for the same pack
 
-### 3. 实验室与办公
+### 3. Lab and office
 
-用基准任务包对比评测路径：
+Use the benchmark packs to compare evaluation paths:
 
 - `benchmark_lab`
 - `benchmark_office`
 
-### 4. 恢复
+### 4. Recovery
 
-查看故障感知路径：
+Inspect the failure-aware path:
 
-- `recovery_demo` — 故障与恢复行为
+- `recovery_demo` — failure and recovery behavior
 
-## 场景矩阵
+## Scenario matrix
 
-| 场景 | 示例 | 输出风格 |
+| Scenario | Example | Output style |
 | --- | --- | --- |
-| 桌面服务 | `run_deskservice` | 端到端执行 |
-| 图编排 | `deskservice_orchestration` | 分阶段规划 + 验证 |
-| 工业工位 | `workcell_kitting` | 技能路由 + 轨迹导出 |
-| 恢复 | `recovery_demo` | 故障处理 |
-| 基准 | `benchmark_workcell`, `benchmark_lab`, `benchmark_office` | 可重复评测 |
+| Desk service | `run_deskservice` | end-to-end execution |
+| Graph orchestration | `deskservice_orchestration` | phased planning + verification |
+| Industrial workcell | `workcell_kitting` | skill routing + trace export |
+| Recovery | `recovery_demo` | failure handling |
+| Benchmark | `benchmark_workcell`, `benchmark_lab`, `benchmark_office` | repeatable evaluation |
 
-## 完整索引
+## Full index
 
-| 名称 | 分类 | 场景 | 路径 | 说明 |
+| Name | Category | Scenario | Path | Description |
 | --- | --- | --- | --- | --- |
-| `run_deskservice` | `execution` | `desk-service execution` | `examples/run_deskservice.py` | 使用适配器完成桌面服务执行 |
-| `deskservice_orchestration` | `orchestration` | `graph orchestration` | `examples/deskservice_orchestration.py` | 基于任务帧的规划与运行时执行 |
-| `workcell_kitting` | `planning` | `industrial workcell` | `examples/workcell_kitting.py` | 工业工位技能路由与轨迹导出 |
-| `recovery_demo` | `recovery` | `failure recovery` | `examples/recovery_demo.py` | 故障与恢复行为 |
-| `benchmark_workcell` | `benchmark` | `benchmark suite` | `examples/benchmark_workcell.py` | 工位任务包的基准运行 |
-| `benchmark_lab` | `benchmark` | `benchmark suite` | `examples/benchmark_lab.py` | 实验室任务包的基准运行 |
-| `benchmark_office` | `benchmark` | `benchmark suite` | `examples/benchmark_office.py` | 办公任务包的基准运行 |
+| `run_deskservice` | `execution` | `desk-service execution` | `examples/run_deskservice.py` | end-to-end deskservice execution with an adapter |
+| `deskservice_orchestration` | `orchestration` | `graph orchestration` | `examples/deskservice_orchestration.py` | task-frame driven planning and runtime execution |
+| `workcell_kitting` | `planning` | `industrial workcell` | `examples/workcell_kitting.py` | workcell skill routing and trace export |
+| `recovery_demo` | `recovery` | `failure recovery` | `examples/recovery_demo.py` | failure and recovery behavior |
+| `benchmark_workcell` | `benchmark` | `benchmark suite` | `examples/benchmark_workcell.py` | benchmark execution for the workcell pack |
+| `benchmark_lab` | `benchmark` | `benchmark suite` | `examples/benchmark_lab.py` | benchmark execution for the lab pack |
+| `benchmark_office` | `benchmark` | `benchmark suite` | `examples/benchmark_office.py` | benchmark execution for the office pack |
 
-## 推荐顺序
-
-1. `examples/run_deskservice.py`
-2. `examples/deskservice_orchestration.py`
-3. `examples/workcell_kitting.py`
-4. `examples/recovery_demo.py`
-5. 基准脚本
-
-## 使用方式
+## How to use
 
 ```bash
 python examples/run_deskservice.py

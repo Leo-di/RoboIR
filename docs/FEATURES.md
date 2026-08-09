@@ -1,22 +1,22 @@
-# 功能总览
+# Features
 
-RoboIR 围绕可复用的具身智能基础设施来组织。
+RoboIR is organized around reusable infrastructure for embodied AI.
 
-## 编排
+## Orchestration
 
-- 基于图的规划与执行
-- 分阶段的观察 / 推理 / 规划 / 验证 / 恢复循环
-- 面向适配器的运行时执行
+- graph-based planning and execution
+- phased observe / reason / plan / verify / recover loops
+- runtime execution against adapters
 
-## 复用
+## Reuse
 
-- 以插件为中心的技能与可供性封装
-- 封装场景、计划和基准状态的任务包
-- 可用于分析与评估复用的轨迹产物
+- plugin-first skill and affordance packaging
+- task packs that bundle scene, plan, and benchmark state
+- trace artifacts that can be reused for analysis and evaluation
 
-## 集成
+## Integration
 
-- 用于快速本地验证的 mock 适配器
-- 用于受控流程的 sim 风格适配器
-- 用于中间件集成的 ROS2 风格适配器
-- 用于仿真流程的 Isaac Sim 风格适配器
+- mock adapter for fast local validation
+- sim-shaped adapter for controlled workflows
+- ROS2-shaped adapter for middleware integration
+- Isaac Sim-shaped adapter for simulation workflows

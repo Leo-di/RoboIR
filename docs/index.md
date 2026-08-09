@@ -1,10 +1,10 @@
 # RoboIR
 
-面向桌面级工业与服务机器人的模块化具身编排层。
+Modular embodied orchestration for desk-level industrial and service robotics.
 
-RoboIR 把具身智能工作流变成可复用的基础设施：任务包、插件、适配器、轨迹，以及基于图的执行。
+RoboIR turns embodied AI workflows into reusable infrastructure: task packs, plugins, adapters, traces, and graph-based execution.
 
-## 快速开始
+## Quick start
 
 ```bash
 roboir run --pack deskservice --adapter mock
@@ -13,56 +13,56 @@ roboir examples
 roboir templates
 ```
 
-## RoboIR 能提供什么
+## What RoboIR gives you
 
-- **任务包**：封装场景、计划和基准数据
-- **插件**：提供可复用技能和可供性
-- **适配器**：对接 mock、sim、ROS2、Isaac Sim 等执行面
-- **编排**：支持基于图的规划、验证与恢复
-- **轨迹**：用于报告、数据集和评估复用
+- **Task packs** for packaging scenario, scene, plan, and benchmark data
+- **Plugins** for reusable skills and affordances
+- **Adapters** for mock, sim, ROS2, and Isaac Sim-shaped surfaces
+- **Orchestration** for graph-based planning, verification, and recovery
+- **Traces** for reporting, datasets, and evaluation reuse
 
-## 典型场景
+## Core use cases
 
-- 桌面服务编排
-- 工业工位整理
-- 故障恢复与人工介入
-- 可基准化的具身工作流
+- desk-service orchestration
+- industrial workcell kitting
+- failure recovery and intervention
+- benchmarkable embodied workflows
 
-## 推荐入口
+## Featured entry points
 
-- [`入门`](GETTING_STARTED.md)
-- [`能力矩阵`](CAPABILITIES.md)
-- [`命令矩阵`](COMMANDS.md)
-- [`功能总览`](FEATURES.md)
-- [`集成地图`](INTEGRATIONS.md)
-- [`使用场景`](USE_CASES.md)
-- [`门户`](PORTAL.md)
-- [`示例`](EXAMPLES.md)
-- [`架构`](ARCHITECTURE.md)
-- [`扩展`](EXTENDING.md)
+- [`Getting Started`](GETTING_STARTED.md)
+- [`Capabilities`](CAPABILITIES.md)
+- [`Commands`](COMMANDS.md)
+- [`Features`](FEATURES.md)
+- [`Integrations`](INTEGRATIONS.md)
+- [`Use Cases`](USE_CASES.md)
+- [`Portal`](PORTAL.md)
+- [`Examples`](EXAMPLES.md)
+- [`Architecture`](ARCHITECTURE.md)
+- [`Extending`](EXTENDING.md)
 
-## 最佳阅读顺序
+## Best first paths
 
-1. [`文档首页`](README.md)
-2. [`示例`](EXAMPLES.md)
-3. [`能力矩阵`](CAPABILITIES.md)
-4. [`命令矩阵`](COMMANDS.md)
-5. [`功能总览`](FEATURES.md)
+1. [`Docs Home`](README.md)
+2. [`Examples`](EXAMPLES.md)
+3. [`Capabilities`](CAPABILITIES.md)
+4. [`Commands`](COMMANDS.md)
+5. [`Features`](FEATURES.md)
 
-## 仓库导览
+## Repository map
 
 - [`README`](../README.md)
-- [`文档首页`](README.md)
-- [`能力矩阵`](CAPABILITIES.md)
-- [`命令矩阵`](COMMANDS.md)
-- [`功能总览`](FEATURES.md)
-- [`集成地图`](INTEGRATIONS.md)
-- [`使用场景`](USE_CASES.md)
-- [`门户`](PORTAL.md)
-- [`示例`](EXAMPLES.md)
-- [`路线图`](ROADMAP.md)
+- [`Docs Home`](README.md)
+- [`Capabilities`](CAPABILITIES.md)
+- [`Commands`](COMMANDS.md)
+- [`Features`](FEATURES.md)
+- [`Integrations`](INTEGRATIONS.md)
+- [`Use Cases`](USE_CASES.md)
+- [`Portal`](PORTAL.md)
+- [`Examples`](EXAMPLES.md)
+- [`Roadmap`](ROADMAP.md)
 
-## 为什么要做这个仓库
+## Why this repo exists
 
-多数具身智能仓库只围绕模型、基准或单个演示展开。
-RoboIR 关注的是把这些部分串起来的基础设施层。
+Most embodied-AI repos are centered on a model, a benchmark, or a single demo.
+RoboIR is centered on the infrastructure layer that ties those parts together.

@@ -1,15 +1,15 @@
-# 适配器模板
+# Adapter Template
 
-这个模板展示了 RoboIR 中最小但有用的适配器表面。
+This template shows the smallest useful adapter surface for RoboIR.
 
-## 适配器应该提供什么
+## What an adapter should provide
 
-- 一个 `name` 字段
-- `observe()` 用于机器人侧状态
-- `execute(command)` 用于后端执行
-- `reset()` 用于重新开始
+- a `name` field
+- `observe()` for robot-side state
+- `execute(command)` for backend execution
+- `reset()` for clean restarts
 
-## 最小模式
+## Minimal pattern
 
 ```python
 from roboir.adapters.template import TemplateRobotAdapter
@@ -17,8 +17,8 @@ from roboir.adapters.template import TemplateRobotAdapter
 adapter = TemplateRobotAdapter()
 ```
 
-## 推荐打包方式
+## Recommended packaging
 
-- 保持适配器与后端绑定
-- 把外部系统调用映射成 `RobotCommand` 和 `RobotFeedback`
-- 不要让适配器承担领域规划逻辑
+- keep the adapter backend-specific
+- map external system calls into `RobotCommand` and `RobotFeedback`
+- keep the adapter free of domain-specific planning logic

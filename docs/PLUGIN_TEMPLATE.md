@@ -1,15 +1,15 @@
-# Plugin Template
+# 插件模板
 
-This template shows the smallest useful plugin surface for RoboIR.
+这个模板展示了 RoboIR 中最小但有用的插件表面。
 
-## What a plugin should provide
+## 插件应该提供什么
 
-- a `PLUGIN` object
-- a `build_plugin()` function
-- one or more reusable `SkillSpec` entries
-- one or more matching `Affordance` entries
+- 一个 `PLUGIN` 对象
+- 一个 `build_plugin()` 函数
+- 一个或多个可复用的 `SkillSpec`
+- 一个或多个匹配的 `Affordance`
 
-## Minimal pattern
+## 最小模式
 
 ```python
 from roboir import Affordance, StaticPlugin, SkillSpec, TaskPhase
@@ -20,7 +20,7 @@ PLUGIN = StaticPlugin(
     skills=(
         SkillSpec(
             name="your_skill_name",
-            description="Describe the reusable skill here",
+            description="在这里描述可复用技能",
             satisfies=["inspect"],
             supported_phases=(TaskPhase.OBSERVE.value,),
         ),
@@ -39,8 +39,8 @@ def build_plugin() -> StaticPlugin:
     return PLUGIN
 ```
 
-## Recommended packaging
+## 推荐打包方式
 
-- put the plugin in a small module under `src/`
-- expose it through `roboir.plugins` if you want auto-discovery
-- keep names domain-specific instead of generic
+- 把插件放在 `src/` 下的小模块里
+- 如果要自动发现，就通过 `roboir.plugins` 暴露它
+- 命名尽量贴近领域，不要过于泛化

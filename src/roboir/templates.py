@@ -21,32 +21,32 @@ def default_template_catalog() -> list[TemplateSpec]:
     return [
         TemplateSpec(
             name="plugin",
-            kind="extension",
+            kind="扩展",
             path="src/roboir_plugins/template.py",
-            description="copyable plugin skeleton",
-            scenario="skill and affordance extension",
-            extension_surface="roboir.plugins",
-            tags=("skill", "affordance", "extension"),
+            description="可复制的插件骨架",
+            scenario="技能与可供性扩展",
+            extension_surface="插件",
+            tags=("技能", "可供性", "扩展"),
             featured=True,
         ),
         TemplateSpec(
             name="adapter",
-            kind="extension",
+            kind="扩展",
             path="src/roboir/adapters/template.py",
-            description="copyable adapter skeleton",
-            scenario="backend integration",
-            extension_surface="robot adapter",
-            tags=("adapter", "runtime", "backend"),
+            description="可复制的适配器骨架",
+            scenario="后端集成",
+            extension_surface="机器人适配器",
+            tags=("适配器", "运行时", "后端"),
             featured=True,
         ),
         TemplateSpec(
             name="task_pack",
-            kind="extension",
+            kind="扩展",
             path="src/roboir/tasks/template.py",
-            description="copyable task-pack skeleton",
-            scenario="task + scene + benchmark bundle",
-            extension_surface="task pack",
-            tags=("scene", "plan", "benchmark"),
+            description="可复制的任务包骨架",
+            scenario="任务 + 场景 + 基准打包",
+            extension_surface="任务包",
+            tags=("场景", "计划", "基准"),
             featured=True,
         ),
     ]
@@ -56,19 +56,19 @@ def templates_markdown(templates: list[TemplateSpec] | None = None) -> str:
     templates = templates or default_template_catalog()
     featured_templates = [template for template in templates if template.featured]
     lines = [
-        "# RoboIR Templates",
+        "# RoboIR 模板",
         "",
-        "Copyable extension points for building downstream embodied AI integrations.",
+        "这些模板是构建下游具身智能集成的最快起点。",
         "",
-        "## Snapshot",
+        "## 快照",
         "",
-        f"- templates: {len(templates)}",
-        f"- featured: {len(featured_templates)}",
-        f"- surfaces: {', '.join(sorted({template.extension_surface for template in templates}))}",
+        f"- 模板数：{len(templates)}",
+        f"- 精选数：{len(featured_templates)}",
+        f"- 覆盖面：{', '.join(sorted({template.extension_surface for template in templates}))}",
         "",
-        "## Recommended starting points",
+        "## 推荐起点",
         "",
-        "| Name | Scenario | Surface | Path | Tags | Description |",
+        "| 名称 | 场景 | 覆盖面 | 路径 | 标签 | 说明 |",
         "| --- | --- | --- | --- | --- | --- |",
     ]
     for template in featured_templates:
@@ -77,13 +77,13 @@ def templates_markdown(templates: list[TemplateSpec] | None = None) -> str:
             f"| `{template.name}` | `{template.scenario}` | `{template.extension_surface}` | `{template.path}` | {tags} | {template.description} |"
         )
     if not featured_templates:
-        lines.append("| - | - | - | - | - | No featured templates configured |")
+        lines.append("| - | - | - | - | - | 暂无精选模板 |")
     lines.extend(
         [
             "",
-            "## Full index",
+            "## 完整索引",
             "",
-            "| Name | Kind | Scenario | Surface | Path | Description |",
+            "| 名称 | 类型 | 场景 | 覆盖面 | 路径 | 说明 |",
             "| --- | --- | --- | --- | --- | --- |",
         ]
     )

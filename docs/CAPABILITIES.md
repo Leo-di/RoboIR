@@ -1,26 +1,26 @@
-# Capabilities
+# 能力矩阵
 
-RoboIR is built as a reusable embodied orchestration layer.
+RoboIR 的设计目标是作为一个可复用的具身编排层。
 
-## Capability matrix
+## 能力矩阵
 
-| Capability | What it covers | Primary surface |
+| 能力 | 覆盖内容 | 主要入口 |
 | --- | --- | --- |
-| Orchestration | graph-based planning, verification, and recovery | `roboir run`, `docs/FEATURES.md` |
-| Reuse | skills, affordances, task packs, and traces | `roboir templates`, `roboir browse` |
-| Execution | mock, sim, ROS2, and Isaac Sim-shaped backends | adapters |
-| Discovery | examples, templates, adapters, task packs, plugins | `roboir browse`, `roboir examples` |
-| Evaluation | traces, reports, benchmarks, and suites | `roboir benchmark`, `roboir suite` |
+| 编排 | 基于图的规划、验证与恢复 | `roboir run`，`docs/FEATURES.md` |
+| 复用 | 技能、可供性、任务包和轨迹 | `roboir templates`，`roboir browse` |
+| 执行 | mock、sim、ROS2、Isaac Sim 风格后端 | 适配器 |
+| 发现 | 示例、模板、适配器、任务包、插件 | `roboir browse`，`roboir examples` |
+| 评估 | 轨迹、报告、基准和套件 | `roboir benchmark`，`roboir suite` |
 
-## Common flows
+## 常见流程
 
-- load a task pack
-- pick an adapter
-- execute a phased graph
-- export trace or report artifacts
-- reuse the same pack in benchmarking
+- 加载任务包
+- 选择适配器
+- 执行分阶段图
+- 导出轨迹或报告
+- 在基准评测中复用同一任务包
 
-## Why this matters
+## 这意味着什么
 
-A strong embodied-AI framework should not only run a task.
-It should make the task reproducible, inspectable, and reusable.
+好的具身智能框架不只是能跑一个任务。
+它还要让任务可复现、可检查、可复用。

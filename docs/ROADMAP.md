@@ -1,23 +1,23 @@
-# Roadmap
+# 路线图
 
-RoboIR is still a framework prototype, but the next milestones are clear.
+RoboIR 目前仍然是一个框架原型，但下一阶段的目标很清晰。
 
-## Near term
+## 近期
 
-- add richer desk-level task packs
-- add a scene-graph export and import path
-- expand adapter examples for ROS2 and Isaac Sim integration
-- add more trace analysis and benchmark summaries
+- 增加更丰富的桌面级任务包
+- 增加场景图导出和导入路径
+- 扩展 ROS2 和 Isaac Sim 集成示例
+- 增加更多轨迹分析和基准摘要
 
-## Mid term
+## 中期
 
-- introduce reusable skill plugins for industrial and service workflows
-- add plugin packaging templates for external repos
-- add more recovery policies and human-in-the-loop flows
-- add benchmark presets for different desk-level domains
+- 为工业和服务工作流引入可复用技能插件
+- 为外部仓库增加插件打包模板
+- 增加更多恢复策略和人机协同流程
+- 为不同桌面级领域增加基准预设
 
-## Long term
+## 远期
 
-- support a larger embodied SDK surface for downstream projects
-- support community-contributed packs and adapters
-- turn traces into reusable datasets and training corpora
+- 为下游项目提供更大的具身 SDK 表面
+- 支持社区贡献的任务包和适配器
+- 把轨迹转成可复用的数据集和训练语料

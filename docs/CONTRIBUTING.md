@@ -1,31 +1,31 @@
-# Contributing
+# 贡献指南
 
-Thanks for helping improve RoboIR.
+感谢你帮助改进 RoboIR。
 
-## Before you start
+## 开始之前
 
-- install the project in editable mode: `python -m pip install -e .[dev]`
-- run the test suite: `pytest`
-- keep changes small and focused on one extension seam when possible
+- 以可编辑模式安装项目：`python -m pip install -e .[dev]`
+- 运行测试：`pytest`
+- 尽量把改动控制在一个扩展面上
 
-## Good contribution targets
+## 适合贡献的方向
 
-- new task packs under `src/roboir/tasks/`
-- new adapters under `src/roboir/adapters/`
-- new plugins under `src/roboir_plugins/`
-- new docs or examples that make the framework easier to try
+- `src/roboir/tasks/` 下的新任务包
+- `src/roboir/adapters/` 下的新适配器
+- `src/roboir_plugins/` 下的新插件
+- 让框架更容易上手的新文档或示例
 
-## Style
+## 风格
 
-- prefer clear names over clever shortcuts
-- keep public APIs stable when possible
-- add or update tests when behavior changes
-- update the README or docs if the user flow changes
+- 用清晰的命名，不用花哨缩写
+- 尽量保持公共 API 稳定
+- 行为变化时补充或更新测试
+- 用户流程变化时同步更新 README 或文档
 
-## Suggested workflow
+## 建议流程
 
-1. reproduce the behavior locally
-2. make the smallest useful change
-3. run the relevant tests
-4. update docs or examples if needed
-5. open a focused pull request
+1. 在本地复现问题
+2. 做最小且有用的修改
+3. 运行相关测试
+4. 必要时更新文档或示例
+5. 发起聚焦的拉取请求

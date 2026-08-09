@@ -1,47 +1,45 @@
-# RoboIR Portal
+# 门户
 
-The portal is the unified landing page for people exploring RoboIR for the first time.
+门户是 RoboIR 面向首次访问者的统一入口。
 
-It is meant to behave like a site homepage for the repository: short, navigable, and action-oriented.
+## 为什么重要
 
-## Why it matters
+高质量的具身智能仓库通常会做好三件事：
 
-High-star robotics repos usually do three things well:
+- 首页足够短
+- 第一条命令足够明确
+- 扩展入口足够清晰
 
-- keep the homepage short
-- point to the first useful command immediately
-- show a clean extension surface
+RoboIR 用统一门户把这些入口聚合在一起。
 
-RoboIR follows that pattern with a single portal for discovery.
+## 章节
 
-## Sections
+- 示例 — 运行示例、编排流程和基准
+- 模板 — 可复制的扩展骨架
+- 适配器 — 支持的执行后端与运行时表面
+- 任务包 — 不同具身领域的内置任务包
+- 插件 — 可发现的技能与可供性包
 
-- Examples — runnable scripts for demos, orchestration, and benchmarks
-- Templates — copyable skeletons for downstream extensions
-- Adapters — supported execution backends and runtime surfaces
-- Task Packs — built-in task bundles for different embodied domains
-- Plugins — discoverable skill and affordance bundles
-
-## Commands
+## 命令
 
 ```bash
 roboir browse
-roboir browse --section Examples
-roboir browse --section Templates
+roboir browse --section 示例
+roboir browse --section 模板
 roboir examples
 roboir templates
 roboir adapters
 ```
 
-## Recommended path
+## 推荐路径
 
-1. run `roboir run --pack deskservice --adapter mock`
-2. open `roboir browse`
-3. copy a template into a downstream package
-4. extend with your own skills, adapters, or task packs
+1. 运行 `roboir run --pack deskservice --adapter mock`
+2. 打开 `roboir browse`
+3. 复制一个模板到下游工程
+4. 用自己的技能、适配器或任务包继续扩展
 
-## Site map
+## 站点地图
 
-- `docs/README.md` for the docs home
-- `docs/HOME.md` for the quickest reading path
-- `README.md` for the repository front page
+- `docs/README.md`：文档首页
+- `docs/HOME.md`：最快阅读路径
+- `README.md`：仓库首页

@@ -1,8 +1,8 @@
-# Getting Started
+# 入门
 
-This guide is the fastest way to try RoboIR as a framework.
+这份指南是最快上手 RoboIR 的方式。
 
-## Install
+## 安装
 
 ```bash
 python3 -m venv .venv
@@ -10,19 +10,19 @@ python3 -m venv .venv
 python -m pip install -e .[dev]
 ```
 
-## Try the deskservice pack
+## 试运行桌面服务任务包
 
 ```bash
 roboir run --pack deskservice --adapter mock
 ```
 
-Expected output:
+预期输出：
 
-- a compact summary in the terminal
-- a structured report when `--json` is provided
-- trace, failure, and memory data inside the runtime
+- 终端里会出现一条简洁摘要
+- 指定 `--json` 时会输出结构化报告
+- 运行时里会保留轨迹、故障和记忆数据
 
-## Other useful commands
+## 其他常用命令
 
 ```bash
 roboir catalog
@@ -41,10 +41,10 @@ roboir examples
 roboir browse
 ```
 
-## What to extend first
+## 先扩展什么
 
-If you want to build on RoboIR, start with one of these:
+如果你想在 RoboIR 上继续做，可以先从下面任一项开始：
 
-- a new task pack for a new embodied domain
-- a new adapter for a simulator or robot backend
-- a plugin that adds reusable skills and affordances
+- 为新的具身领域增加一个任务包
+- 为仿真器或机器人后端增加一个适配器
+- 为可复用技能与可供性增加一个插件

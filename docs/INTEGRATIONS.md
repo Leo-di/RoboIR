@@ -1,37 +1,37 @@
-# Integrations
+# 集成地图
 
-RoboIR is intentionally built as a layer that can connect to many embodied AI surfaces.
+RoboIR 的目标之一，是作为可以接入多种具身智能接口的中间层。
 
-## Integration map
+## 集成地图
 
-| Surface | Role in RoboIR | Examples |
+| 面向 | 在 RoboIR 中的角色 | 示例 |
 | --- | --- | --- |
-| Task packs | bundle scene, plan, and benchmark state | `deskservice`, `workcell`, `lab`, `office` |
-| Plugins | provide reusable skills and affordances | built-in and entry-point plugins |
-| Adapters | connect execution to backends | `mock`, `sim`, `ros2`, `isaac_sim` |
-| Traces | preserve runtime behavior for reuse | reports, datasets, benchmark artifacts |
-| Docs | guide discovery and extension | `docs/index.md`, `docs/PORTAL.md` |
-| Examples | show the canonical workflows | `examples/run_deskservice.py` |
-| CLI | expose the high-signal surfaces | `roboir run`, `roboir browse` |
+| 任务包 | 封装场景、计划和基准状态 | `deskservice`、`workcell`、`lab`、`office` |
+| 插件 | 提供可复用技能和可供性 | 内置与入口点插件 |
+| 适配器 | 对接执行后端 | `mock`、`sim`、`ros2`、`isaac_sim` |
+| 轨迹 | 保留运行过程，便于复用 | 报告、数据集、基准产物 |
+| 文档 | 引导发现与扩展 | `docs/index.md`、`docs/PORTAL.md` |
+| 示例 | 展示标准工作流 | `examples/run_deskservice.py` |
+| 命令行 | 暴露高信号入口 | `roboir run`、`roboir browse` |
 
-## Common combinations
+## 常见组合
 
-### Development
+### 开发
 
-- task pack + mock adapter + trace export
+- 任务包 + mock 适配器 + 轨迹导出
 
-### Simulation
+### 仿真
 
-- task pack + sim adapter + visualize
+- 任务包 + sim 适配器 + 可视化
 
-### Middleware
+### 中间件
 
-- task pack + ROS2-shaped adapter + report export
+- 任务包 + ROS2 风格适配器 + 报告导出
 
-### Benchmarking
+### 基准评测
 
-- task pack + benchmark + suite
+- 任务包 + 基准 + 套件
 
-## Why this matters
+## 为什么这很重要
 
-The project becomes easier to adopt when each part has a clear integration role.
+当每个部分都有清晰的集成角色时，项目就更容易被接入和传播。

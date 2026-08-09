@@ -61,17 +61,17 @@ class PortalIndex:
         section_count = len(self.sections)
         entry_count = sum(len(section.entries) for section in self.sections)
         lines = [
-            "# RoboIR Portal",
+            "# RoboIR 门户",
             "",
-            "A unified index for examples, templates, adapters, task packs, and plugins.",
+            "示例、模板、适配器、任务包和插件的统一索引。",
             "",
-            "## Snapshot",
+            "## 快照",
             "",
-            f"- sections: {section_count}",
-            f"- entries: {entry_count}",
-            "- best for: quick discovery, downstream reuse, and repo onboarding",
+            f"- 章节数：{section_count}",
+            f"- 条目数：{entry_count}",
+            "- 适用场景：快速发现、下游复用和仓库导览",
             "",
-            "## Launch points",
+            "## 入口",
             "",
             "```bash",
             "roboir examples",
@@ -87,7 +87,7 @@ class PortalIndex:
                 "",
                 section.description,
                 "",
-                "| Name | Kind | Path | Description |",
+                "| 名称 | 类型 | 路径 | 说明 |",
                 "| --- | --- | --- | --- |",
             ])
             for entry in section.entries:
@@ -141,7 +141,7 @@ def _plugin_entries() -> tuple[PortalEntry, ...]:
                 name=plugin.name,
                 kind=plugin.__class__.__name__,
                 path=f"entrypoint://{plugin.name}",
-                description="discovered plugin entry point",
+                description="已发现的插件入口点",
             )
         )
     if not entries:
@@ -152,7 +152,7 @@ def _plugin_entries() -> tuple[PortalEntry, ...]:
                         name=plugin.name,
                         kind=plugin.__class__.__name__,
                         path=f"module://{plugin.name}",
-                        description="built-in plugin bundle",
+                        description="内置插件包",
                     )
                 )
     return tuple(entries)
@@ -162,28 +162,28 @@ def default_portal_index() -> PortalIndex:
     return PortalIndex(
         sections=(
             PortalSection(
-                name="Examples",
-                description="Runnable scripts for quick validation and demos.",
+                name="示例",
+                description="用于快速验证和演示的可运行脚本。",
                 entries=_example_entries(),
             ),
             PortalSection(
-                name="Templates",
-                description="Copyable skeletons for downstream repos.",
+                name="模板",
+                description="可复制到下游仓库的骨架。",
                 entries=_template_entries(),
             ),
             PortalSection(
-                name="Adapters",
-                description="Supported execution backends and runtime surfaces.",
+                name="适配器",
+                description="支持的执行后端与运行时表面。",
                 entries=_adapter_entries(),
             ),
             PortalSection(
-                name="Task Packs",
-                description="Built-in task packs that bundle scene, plan, and benchmark.",
+                name="任务包",
+                description="把场景、计划和基准打包在一起的内置任务包。",
                 entries=_task_entries(),
             ),
             PortalSection(
-                name="Plugins",
-                description="Discoverable skill and affordance bundles.",
+                name="插件",
+                description="可发现的技能与可供性包。",
                 entries=_plugin_entries(),
             ),
         ),
@@ -191,4 +191,4 @@ def default_portal_index() -> PortalIndex:
 
 
 def portal_sections() -> list[str]:
-    return ["Examples", "Templates", "Adapters", "Task Packs", "Plugins"]
+    return ["示例", "模板", "适配器", "任务包", "插件"]

@@ -1,59 +1,60 @@
-# Extending RoboIR
+# 扩展 RoboIR
 
-`RoboIR` is organized around three extension seams:
+`RoboIR` 围绕三个扩展面组织：
 
-1. **Plugins** — register reusable skills and affordances
-2. **Adapters** — connect execution to simulators or robots
-3. **Task packs** — package a domain-specific scene, plan, and benchmark together
+1. **插件**——注册可复用技能和可供性
+2. **适配器**——对接仿真器或机器人
+3. **任务包**——把场景、计划和基准一起打包
 
-For a copy-paste plugin skeleton, see [`docs/PLUGIN_TEMPLATE.md`](PLUGIN_TEMPLATE.md).
-For a copy-paste task pack skeleton, see [`docs/TASK_TEMPLATE.md`](TASK_TEMPLATE.md) and `src/roboir/tasks/template.py`.
-For a copy-paste adapter skeleton, see [`docs/ADAPTER_TEMPLATE.md`](ADAPTER_TEMPLATE.md) and `src/roboir/adapters/template.py`.
-Use `roboir templates` to list all template modules in one place.
-Use `roboir browse` to see the unified portal for the whole repository.
+可复制的插件骨架见 [`docs/PLUGIN_TEMPLATE.md`](PLUGIN_TEMPLATE.md)。
+可复制的任务包骨架见 [`docs/TASK_TEMPLATE.md`](TASK_TEMPLATE.md) 以及 `src/roboir/tasks/template.py`。
+可复制的适配器骨架见 [`docs/ADAPTER_TEMPLATE.md`](ADAPTER_TEMPLATE.md) 以及 `src/roboir/adapters/template.py`。
 
-## Plugin surface
+用 `roboir templates` 可以一次查看全部模板。
+用 `roboir browse` 可以查看整个仓库的统一门户。
 
-A plugin exposes a `register()` method and can be discovered either from an entry point or by loading a module that exports `PLUGIN` or `build_plugin()`.
+## 插件面
 
-Example entry-point target:
+插件需要提供一个 `register()` 方法，并且可以通过入口点发现，或者通过导出 `PLUGIN` / `build_plugin()` 的模块加载。
+
+示例入口点：
 
 ```toml
 [project.entry-points."roboir.plugins"]
 deskservice = "roboir_plugins.deskservice:PLUGIN"
 ```
 
-## Adapter surface
+## 适配器面
 
-Adapters implement the `RobotAdapter` protocol:
+适配器实现 `RobotAdapter` 协议：
 
-- `observe()` returns the current robot-side observation
-- `execute(command)` sends a skill command and returns feedback
-- `reset()` clears adapter state
+- `observe()` 返回机器人侧观察
+- `execute(command)` 发送技能命令并返回反馈
+- `reset()` 清空适配器状态
 
-`RoboIR` ships with `mock`, `sim`, `ros2`, and `isaac_sim`-shaped adapters for development and demos.
+`RoboIR` 提供 `mock`、`sim`、`ros2` 和 `isaac_sim` 风格适配器，便于开发和演示。
 
-## Task packs
+## 任务包
 
-Task packs bind together:
+任务包会绑定：
 
-- a scene graph
-- a plan graph
-- a benchmark suite
-- a runtime with plugins installed
+- 场景图
+- 计划图
+- 基准套件
+- 已安装插件的运行时
 
-The `deskservice` pack is the most representative desktop industrial/service example in this repo.
+`deskservice` 包是仓库里最能代表桌面工业/服务场景的例子。
 
-## Template module
+## 模板模块
 
-`src/roboir_plugins/template.py` is a minimal plugin skeleton you can copy into a downstream repository.
+`src/roboir_plugins/template.py` 是可以复制到下游仓库的最小插件骨架。
 
-`src/roboir/tasks/template.py` is a minimal task-pack skeleton you can copy into a downstream repository.
+`src/roboir/tasks/template.py` 是可以复制到下游仓库的最小任务包骨架。
 
-`src/roboir/adapters/template.py` is a minimal adapter skeleton you can copy into a downstream repository.
+`src/roboir/adapters/template.py` 是可以复制到下游仓库的最小适配器骨架。
 
-## Where to start
+## 从哪里开始
 
-- for a new domain, copy the `deskservice` pack pattern
-- for a new backend, add an adapter and register it in the factory
-- for a new reusable capability, package it as a plugin
+- 新领域：先复制 `deskservice` 任务包模式
+- 新后端：先加适配器，并注册到工厂里
+- 新能力：先封装成插件
